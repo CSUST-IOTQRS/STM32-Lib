@@ -55,6 +55,16 @@ void SystemClock_Config(void);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 
+// 滴答定时器中断回调函数
+void HAL_SYSTICK_Callback(void)
+{
+    // 每500ms翻转一次PC13引脚的电平状态
+    if(uwTick % 500 == 0)
+    {
+        HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
+    }
+}
+
 /* USER CODE END 0 */
 
 /**

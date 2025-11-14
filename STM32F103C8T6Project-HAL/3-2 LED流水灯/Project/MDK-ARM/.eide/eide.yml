@@ -46,6 +46,14 @@ virtualFolder:
           files:
             - path: ../Core/Src/system_stm32f1xx.c
           folders: []
+    - name: System
+      files:
+        - path: ../System/Delay.c
+        - path: ../System/Delay.h
+      folders: []
+    - name: ::CMSIS
+      files: []
+      folders: []
 dependenceList: []
 outDir: build
 miscInfo:
@@ -62,11 +70,12 @@ targets:
         - ../Drivers/STM32F1xx_HAL_Driver/Inc
         - ../Drivers/CMSIS/Device/ST/STM32F1xx/Include
         - ../Drivers/CMSIS/Include
+        - ../System
         - .cmsis/include
         - RTE/_Project
       libList: []
     excludeList: []
-    toolchain: AC6
+    toolchain: AC5
     toolchainConfigMap:
       AC5:
         archExtensions: ""
@@ -121,8 +130,8 @@ targets:
             - id: 1
               isChecked: true
               mem:
-                size: ""
-                startAddr: ""
+                size: "0x5000"
+                startAddr: "0x20000000"
               noInit: false
               tag: IRAM
             - id: 2
@@ -158,11 +167,11 @@ targets:
               isChecked: true
               isStartup: true
               mem:
-                size: ""
-                startAddr: ""
+                size: "0x10000"
+                startAddr: "0x8000000"
               tag: IROM
             - id: 2
-              isChecked: true
+              isChecked: false
               isStartup: false
               mem:
                 size: "0x0"
@@ -173,26 +182,7 @@ targets:
         archExtensions: ""
         cpuType: Cortex-M3
         floatingPointHardware: none
-        options:
-          version: 3
-          afterBuildTasks: []
-          asm-compiler:
-            $use: asm-auto
-            misc-controls: ""
-          beforeBuildTasks: []
-          c/cpp-compiler:
-            language-c: c99
-            language-cpp: c++11
-            link-time-optimization: false
-            optimization: level-0
-          global:
-            output-debug-info: enable
-            use-microLIB: false
-          linker:
-            $outputTaskExcludes:
-              - .bin
-            misc-controls: --diag_suppress=L6329
-            output-format: elf
+        options: ""
         scatterFilePath: <YOUR_SCATTER_FILE>.sct
         storageLayout:
           RAM:
@@ -222,4 +212,14 @@ targets:
         otherCmds: ""
         proType: 1
         speed: 8000
-    uploader: JLink
+      STLink:
+        address: "0x8000000"
+        bin: ""
+        elFile: None
+        optionBytes: .eide/project.st.option.bytes.ini
+        otherCmds: ""
+        proType: SWD
+        resetMode: default
+        runAfterProgram: true
+        speed: 4000
+    uploader: STLink

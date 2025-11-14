@@ -16,6 +16,7 @@
 "project\stm32f1xx_hal_flash_ex.o"
 "project\stm32f1xx_hal_exti.o"
 "project\system_stm32f1xx.o"
+"project\delay.o"
 --strict --scatter "Project\Project.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers
